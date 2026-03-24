@@ -24,7 +24,7 @@
                 <div
                     class="bg-white rounded-2xl p-3 shadow-xl shadow-slate-200/50 hover:-translate-y-1 transition-transform duration-300 group cursor-pointer">
                     <div class="relative aspect-[4/3] rounded-xl overflow-hidden mb-4">
-                        <img src="{{ asset('storage/' . $gallery->image_path) }}" alt="{{ $gallery->title }}"
+                        <img src="{{ asset('storage/' . $gallery->image_path) }}" alt="{{ $gallery->title }}" loading="lazy"
                             class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                             onerror="this.src='https://via.placeholder.com/400x300?text=No+Image'">
                         <div
