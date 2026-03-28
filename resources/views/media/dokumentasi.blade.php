@@ -32,7 +32,7 @@
 
                     @if($documentation->image_path)
                         <div class="mb-6 rounded-xl overflow-hidden shadow-sm bg-slate-50 border border-slate-100">
-                            <img src="{{ asset('storage/' . $documentation->image_path) }}" alt="{{ $documentation->title }}"
+                            <img src="{{ asset('storage/' . $documentation->image_path) }}" alt="{{ $documentation->title }}" loading="lazy"
                                 class="w-full h-auto object-cover max-h-96" onerror="this.style.display='none'">
                         </div>
                     @endif
