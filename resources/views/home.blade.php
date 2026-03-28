@@ -60,7 +60,7 @@
                 <div
                     class="group relative rounded-2xl p-8 shadow-sm hover:shadow-xl transition-all duration-300 overflow-hidden h-[300px] flex flex-col justify-end">
                     <div class="absolute inset-0 z-0">
-                        <img src="{{ asset('assets/ic1.webp') }}" alt="Dasar Hukum"
+                        <img src="{{ asset('assets/ic1.webp') }}" alt="Dasar Hukum" loading="lazy"
                             class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
                         <div
                             class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent opacity-80 group-hover:opacity-90 transition-opacity">
@@ -79,7 +79,7 @@
                 <div
                     class="group relative rounded-2xl p-8 shadow-sm hover:shadow-xl transition-all duration-300 overflow-hidden h-[300px] flex flex-col justify-end">
                     <div class="absolute inset-0 z-0">
-                        <img src="{{ asset('assets/ic2.webp') }}" alt="Nilai Tawar"
+                        <img src="{{ asset('assets/ic2.webp') }}" alt="Nilai Tawar" loading="lazy"
                             class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
                         <div
                             class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent opacity-80 group-hover:opacity-90 transition-opacity">
@@ -98,7 +98,7 @@
                 <div
                     class="group relative rounded-2xl p-8 shadow-sm hover:shadow-xl transition-all duration-300 overflow-hidden h-[300px] flex flex-col justify-end">
                     <div class="absolute inset-0 z-0">
-                        <img src="{{ asset('assets/ic3.webp') }}" alt="Keuntungan Industri"
+                        <img src="{{ asset('assets/ic3.webp') }}" alt="Keuntungan Industri" loading="lazy"
                             class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
                         <div
                             class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent opacity-80 group-hover:opacity-90 transition-opacity">
@@ -165,7 +165,7 @@
                         <article
                             class="flex flex-col bg-background-light rounded-2xl overflow-hidden hover:shadow-lg transition-shadow duration-300 border border-slate-100 h-full">
                             <div class="h-64 relative overflow-hidden group">
-                                <img alt="{{ $gallery->title }}"
+                                <img alt="{{ $gallery->title }}" loading="lazy"
                                     class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                                     src="{{ asset('storage/' . $gallery->image_path) }}"
                                     onerror="this.src='https://via.placeholder.com/400x300?text=No+Image'" />
