@@ -17,6 +17,9 @@ class CertificateController extends Controller
             'certificate_number' => 'required|string',
         ]);
 
+        // ⚡ Bolt Optimization: Added index on `certificate_number` in the `assessments` table.
+        // Impact: Provides O(log n) lookup instead of a full table scan, significantly improving
+        // performance when checking certificates, especially as the number of issued certificates grows.
         $assessment = Assessment::with(['user', 'scheme'])
             ->where('certificate_number', $request->certificate_number)
             ->where('status', 'completed')
