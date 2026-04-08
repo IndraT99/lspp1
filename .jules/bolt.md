@@ -1,0 +1,3 @@
+## 2024-04-08 - Adding Index on Frequently Queried Public Endpoints
+**Learning:** The public-facing endpoint to verify a certificate queries the `assessments` table using `certificate_number`. As the number of certificates grows, this query could lead to slow response times and high server load because the `certificate_number` column lacks a database index, resulting in a full table scan for every verification request.
+**Action:** Always verify if database queries that map directly to user input (such as searching by certificate number, email, or order ID) have appropriate indexes on the underlying database tables, especially on public-facing endpoints that might receive high traffic.
