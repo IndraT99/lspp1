@@ -276,7 +276,8 @@
                 <div class="space-y-4">
                     <div class="flex items-center gap-2 mb-4">
                         <div class="w-8 h-8 bg-primary rounded-lg flex items-center justify-center p-1">
-                            <img src="{{ asset('assets/logosmk.png') }}" alt="Logo"
+                            {{-- ⚡ Bolt Performance Optimization: Added lazy loading to footer logo --}}
+                            <img src="{{ asset('assets/logosmk.png') }}" alt="Logo" loading="lazy"
                                 class="w-full h-full object-contain">
                         </div>
                         <span class="font-bold text-xl text-slate-900">LSP-P1<span class="text-primary">.</span></span>
