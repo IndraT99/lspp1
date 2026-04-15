@@ -8,7 +8,8 @@ class MediaController extends Controller
 {
     public function galeri()
     {
-        $galleries = \App\Models\Gallery::where('is_active', true)->orderBy('event_date', 'desc')->get();
+        // ⚡ Bolt Performance: Added pagination to prevent memory exhaustion and excessive DOM nodes for large image sets
+        $galleries = \App\Models\Gallery::where('is_active', true)->orderBy('event_date', 'desc')->paginate(12);
         return view('media.galeri', compact('galleries'));
     }
 
