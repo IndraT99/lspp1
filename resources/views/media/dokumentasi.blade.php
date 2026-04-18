@@ -50,5 +50,11 @@
                 </div>
             @endforelse
         </div>
+
+        @if($documentations->hasPages())
+            <div class="mt-12 flex justify-center">
+                {{ $documentations->links() }}
+            </div>
+        @endif
     </div>
 @endsection
