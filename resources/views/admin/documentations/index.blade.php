@@ -66,5 +66,11 @@
                 @endforelse
             </tbody>
         </table>
+
+        @if($documentations->hasPages())
+            <div class="p-4 border-t-2 border-border-strong bg-slate-50">
+                {{ $documentations->links() }}
+            </div>
+        @endif
     </div>
 @endsection
