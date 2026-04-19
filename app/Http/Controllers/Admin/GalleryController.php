@@ -13,7 +13,8 @@ class GalleryController extends Controller
      */
     public function index()
     {
-        $galleries = Gallery::latest()->get();
+        // ⚡ Bolt Optimization: Use pagination for unbounded gallery data to prevent admin page load issues
+        $galleries = Gallery::latest()->paginate(15);
         return view('admin.galleries.index', compact('galleries'));
     }
 
