@@ -62,5 +62,10 @@
                 @endforelse
             </tbody>
         </table>
+        @if($galleries->hasPages())
+            <div class="p-4 border-t-2 border-border-strong">
+                {{ $galleries->links() }}
+            </div>
+        @endif
     </div>
 @endsection
