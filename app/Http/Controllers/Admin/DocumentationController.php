@@ -13,7 +13,8 @@ class DocumentationController extends Controller
      */
     public function index()
     {
-        $documentations = Documentation::latest()->get();
+        // ⚡ Bolt: Using pagination to prevent memory exhaustion on admin documentation views
+        $documentations = Documentation::latest()->paginate(10);
         return view('admin.documentations.index', compact('documentations'));
     }
 

@@ -1,0 +1,3 @@
+## 2024-06-25 - Unbounded Database Queries on Public Media Endpoints
+**Learning:** The `MediaController`, `Admin\GalleryController`, and `Admin\DocumentationController` used unbounded `->get()` queries to fetch records. This can cause severe memory exhaustion or application crashes as the data grows, particularly on public-facing pages like the media gallery and documentation pages.
+**Action:** Always verify database queries that fetch dynamic/user-generated content (like galleries and documentation) use `->paginate()` instead of `->get()`. Add pagination links using `$collection->links()` in the associated Blade templates.
