@@ -1,0 +1,3 @@
+## 2024-05-18 - Prevent Memory Exhaustion with Unbounded Data
+**Learning:** In Laravel applications, unbounded or rapidly growing user-generated content (like galleries and documentation) can lead to memory exhaustion and severe performance degradation if queried using `->get()`. Iterating over a `LengthAwarePaginator` in Blade views behaves identically to a standard `Collection`, meaning replacing `->get()` with `->paginate()` does not break existing `@foreach` loops.
+**Action:** Always default to using `->paginate()` instead of `->get()` in Eloquent queries for unbounded collections to ensure memory stability as the dataset grows.
