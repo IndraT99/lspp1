@@ -67,4 +67,8 @@
             </tbody>
         </table>
     </div>
+
+    <div class="mt-4">
+        {{ $documentations->links() }}
+    </div>
 @endsection
