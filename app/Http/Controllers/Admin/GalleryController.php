@@ -13,7 +13,8 @@ class GalleryController extends Controller
      */
     public function index()
     {
-        $galleries = Gallery::latest()->get();
+        // Performance optimization: Use pagination instead of get() to prevent memory exhaustion on large datasets
+        $galleries = Gallery::latest()->paginate(20);
         return view('admin.galleries.index', compact('galleries'));
     }
 
