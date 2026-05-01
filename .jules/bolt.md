@@ -1,0 +1,3 @@
+## 2026-05-01 - Prevent Memory Exhaustion with Unbounded Eloquent Queries
+**Learning:** Found that user-generated content sections (Galleries and Documentations) were using `->get()` without limits. In Laravel, retrieving thousands of records via Eloquent into a Collection consumes significant server memory and causes slow page loads (O(N) memory complexity). This is a critical bottleneck specific to unbounded UI lists.
+**Action:** Always default to `->paginate(N)` for unbounded content sections instead of `->get()`, and ensure `{{ $collection->links() }}` is added to Blade templates to surface navigation controls.
