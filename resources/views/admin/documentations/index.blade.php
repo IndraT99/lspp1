@@ -66,5 +66,8 @@
                 @endforelse
             </tbody>
         </table>
+        <div class="mt-6 p-4 border-t-2 border-border-strong">
+            {{ $documentations->links() }}
+        </div>
     </div>
 @endsection

@@ -13,7 +13,9 @@ class GalleryController extends Controller
      */
     public function index()
     {
-        $galleries = Gallery::latest()->get();
+        // ⚡ Bolt Performance Optimization: Replace ->get() with ->paginate()
+        // Prevents memory exhaustion and speeds up admin list view rendering.
+        $galleries = Gallery::latest()->paginate(10);
         return view('admin.galleries.index', compact('galleries'));
     }
 

@@ -1,0 +1,3 @@
+## 2024-05-02 - Unbounded Collection Growth Causes Memory Exhaustion
+**Learning:** Returning large, unbounded collections of user-generated content (like Gallery or Documentation records) using `->get()` without pagination leads to performance degradation and memory exhaustion as the data size grows. Even if it seems okay during early development with limited records, this practice will break at scale.
+**Action:** Always default to using `->paginate()` instead of `->get()` in Eloquent queries for unbounded or rapidly growing content collections in both API endpoints and rendering controllers to ensure predictable memory usage and page load times.
