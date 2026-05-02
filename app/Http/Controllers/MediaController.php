@@ -8,13 +8,17 @@ class MediaController extends Controller
 {
     public function galeri()
     {
-        $galleries = \App\Models\Gallery::where('is_active', true)->orderBy('event_date', 'desc')->get();
+        // ⚡ Bolt Performance Optimization: Replace ->get() with ->paginate()
+        // Prevents memory exhaustion and speeds up rendering when galleries dataset grows large.
+        $galleries = \App\Models\Gallery::where('is_active', true)->orderBy('event_date', 'desc')->paginate(12);
         return view('media.galeri', compact('galleries'));
     }
 
     public function dokumentasi()
     {
-        $documentations = \App\Models\Documentation::where('is_active', true)->latest()->get();
+        // ⚡ Bolt Performance Optimization: Replace ->get() with ->paginate()
+        // Prevents memory exhaustion and speeds up rendering when documentation dataset grows large.
+        $documentations = \App\Models\Documentation::where('is_active', true)->latest()->paginate(12);
         return view('media.dokumentasi', compact('documentations'));
     }
 }
