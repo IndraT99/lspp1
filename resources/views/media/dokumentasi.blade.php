@@ -50,5 +50,9 @@
                 </div>
             @endforelse
         </div>
+
+        <div class="mt-12 max-w-4xl mx-auto">
+            {{ $documentations->links() }}
+        </div>
     </div>
 @endsection
