@@ -1,0 +1,3 @@
+## 2024-05-07 - Pagination vs get() for unbounded models
+**Learning:** In this application, models like Gallery and Documentation are prone to rapid growth as user-generated content increases. Using `->get()` without limits on these models caused a performance bottleneck and risk of memory exhaustion, as it attempts to load all records into memory at once.
+**Action:** Always default to using `->paginate()` instead of `->get()` in Eloquent queries for unbounded or rapidly growing user-generated content to ensure predictable memory usage (O(1) vs O(N)) and prevent performance degradation. Iterating over a LengthAwarePaginator in Blade views behaves the same as standard Collections.
