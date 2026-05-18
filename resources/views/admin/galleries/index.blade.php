@@ -63,4 +63,8 @@
             </tbody>
         </table>
     </div>
+
+    <div class="mt-4">
+        {{ $galleries->links() }}
+    </div>
 @endsection
