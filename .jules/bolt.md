@@ -1,0 +1,3 @@
+## 2024-05-20 - Prevent memory exhaustion on unbounded collections
+**Learning:** Using `->get()` on rapidly growing user-generated content (like galleries and documentations) is a severe anti-pattern in Laravel. As content scales, loading thousands of models into memory simultaneously causes memory exhaustion and significantly degrades rendering performance, especially since the views only display a subset of the data.
+**Action:** Always default to using `->paginate()` in Eloquent queries for potentially large datasets to keep memory usage flat, and remember to render the navigation links using `{{ $collection->links() }}` in the Blade views.
