@@ -50,5 +50,11 @@
                 </div>
             @endforelse
         </div>
+
+        @if($documentations->hasPages())
+            <div>
+                {{ $documentations->links() }}
+            </div>
+        @endif
     </div>
 @endsection
