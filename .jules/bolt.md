@@ -1,0 +1,3 @@
+## 2025-02-18 - Replacing ->get() with ->paginate() in MediaController
+**Learning:** For unbounded or rapidly growing user-generated content like galleries and documentation in this specific application, default to using `->paginate()` instead of `->get()` in Eloquent queries. This prevents memory exhaustion and query slowdowns as the database tables grow. The transition is seamless since the `LengthAwarePaginator` iteration works exactly like standard `Collection` objects in Blade loops.
+**Action:** Always verify if a controller fetching a collection is paginated if it has the potential to grow arbitrarily large. Implement `{{ $collection->links() }}` in the corresponding view to expose pagination controls.
