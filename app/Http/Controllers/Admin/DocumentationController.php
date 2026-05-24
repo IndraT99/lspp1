@@ -13,7 +13,10 @@ class DocumentationController extends Controller
      */
     public function index()
     {
-        $documentations = Documentation::latest()->get();
+        // Performance Optimization (Bolt): Replaced get() with paginate(10)
+        // to prevent OOM errors and large payload issues on the admin screen.
+        // Expected Impact: Scales infinitely without performance degradation.
+        $documentations = Documentation::latest()->paginate(10);
         return view('admin.documentations.index', compact('documentations'));
     }
 

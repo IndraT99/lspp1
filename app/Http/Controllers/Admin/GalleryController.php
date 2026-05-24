@@ -13,7 +13,10 @@ class GalleryController extends Controller
      */
     public function index()
     {
-        $galleries = Gallery::latest()->get();
+        // Performance Optimization (Bolt): Replaced get() with paginate(10)
+        // to prevent UI freezing and OOM errors when rendering thousands of gallery items.
+        // Expected Impact: Fast, consistent load times regardless of total DB records.
+        $galleries = Gallery::latest()->paginate(10);
         return view('admin.galleries.index', compact('galleries'));
     }
 
