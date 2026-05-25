@@ -57,5 +57,10 @@
                 </div>
             @endforelse
         </div>
+        @if($galleries->hasPages())
+            <div class="mt-8 flex justify-center">
+                {{ $galleries->links() }}
+            </div>
+        @endif
     </div>
 @endsection
