@@ -13,7 +13,9 @@ class GalleryController extends Controller
      */
     public function index()
     {
-        $galleries = Gallery::latest()->get();
+        // Performance optimization: Replaced get() with paginate(10) to reduce
+        // peak memory consumption for unbounded gallery records.
+        $galleries = Gallery::latest()->paginate(10);
         return view('admin.galleries.index', compact('galleries'));
     }
 

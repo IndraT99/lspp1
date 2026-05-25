@@ -13,7 +13,9 @@ class DocumentationController extends Controller
      */
     public function index()
     {
-        $documentations = Documentation::latest()->get();
+        // Performance optimization: Replaced get() with paginate(10) to prevent
+        // OutOfMemory errors when the documentation list grows large.
+        $documentations = Documentation::latest()->paginate(10);
         return view('admin.documentations.index', compact('documentations'));
     }
 
