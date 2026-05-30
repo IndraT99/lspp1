@@ -50,5 +50,8 @@
                 </div>
             @endforelse
         </div>
+        <div>
+            {{ $documentations->links() }}
+        </div>
     </div>
 @endsection
