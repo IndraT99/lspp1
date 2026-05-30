@@ -57,5 +57,8 @@
                 </div>
             @endforelse
         </div>
+        <div>
+            {{ $galleries->links() }}
+        </div>
     </div>
 @endsection
