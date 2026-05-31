@@ -57,5 +57,10 @@
                 </div>
             @endforelse
         </div>
+        @if($galleries->hasPages())
+            <div class="mt-8">
+                {{ $galleries->links() }}
+            </div>
+        @endif
     </div>
 @endsection
