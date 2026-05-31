@@ -50,5 +50,10 @@
                 </div>
             @endforelse
         </div>
+        @if($documentations->hasPages())
+            <div class="mt-8">
+                {{ $documentations->links() }}
+            </div>
+        @endif
     </div>
 @endsection
