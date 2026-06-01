@@ -57,5 +57,6 @@
                 </div>
             @endforelse
         </div>
+        <div class="mt-8">{{ $galleries->links() }}</div>
     </div>
 @endsection
