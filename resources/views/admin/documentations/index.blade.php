@@ -66,5 +66,8 @@
                 @endforelse
             </tbody>
         </table>
+        <div>
+            {{ $documentations->links() }}
+        </div>
     </div>
 @endsection
