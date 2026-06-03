@@ -62,5 +62,8 @@
                 @endforelse
             </tbody>
         </table>
+        <div>
+            {{ $galleries->links() }}
+        </div>
     </div>
 @endsection

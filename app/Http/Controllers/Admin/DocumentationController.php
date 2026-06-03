@@ -13,7 +13,7 @@ class DocumentationController extends Controller
      */
     public function index()
     {
-        $documentations = Documentation::latest()->get();
+        $documentations = Documentation::latest()->paginate(15);
         return view('admin.documentations.index', compact('documentations'));
     }
 
