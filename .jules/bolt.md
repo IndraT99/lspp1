@@ -1,0 +1,3 @@
+## 2024-06-04 - Unbounded User-Generated Content Query Optimization
+**Learning:** Found that rapidly growing user-generated content tables (like galleries and documentation) were being queried using `->get()` without limits, which can cause severe memory exhaustion and performance degradation as the database grows. Iterating over a `LengthAwarePaginator` in Laravel Blade behaves exactly like a Collection, making the swap seamless.
+**Action:** Always default to using `->paginate()` instead of `->get()` for unbounded data models in Eloquent queries, and add `->links()` to the corresponding Blade views.
