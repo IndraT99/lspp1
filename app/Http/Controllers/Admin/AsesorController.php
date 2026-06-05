@@ -31,6 +31,9 @@ class AsesorController extends Controller
 
         Asesor::create($request->all());
 
+        // Clear cached asesors when a new one is added
+        \Illuminate\Support\Facades\Cache::forget('active_asesors_with_schemes');
+
         return redirect()->route('admin.asesors.index')->with('success', 'Asesor berhasil ditambahkan.');
     }
 
@@ -50,12 +53,19 @@ class AsesorController extends Controller
 
         $asesor->update($request->all());
 
+        // Clear cached asesors when updated
+        \Illuminate\Support\Facades\Cache::forget('active_asesors_with_schemes');
+
         return redirect()->route('admin.asesors.index')->with('success', 'Asesor berhasil diperbarui.');
     }
 
     public function destroy(Asesor $asesor)
     {
         $asesor->delete();
+
+        // Clear cached asesors when deleted
+        \Illuminate\Support\Facades\Cache::forget('active_asesors_with_schemes');
+
         return redirect()->route('admin.asesors.index')->with('success', 'Asesor berhasil dihapus.');
     }
 }

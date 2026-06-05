@@ -39,6 +39,9 @@ class SchemeController extends Controller
 
         Scheme::create($data);
 
+        // Clear cached asesors because they eager-load schemes
+        \Illuminate\Support\Facades\Cache::forget('active_asesors_with_schemes');
+
         return redirect()->route('admin.schemes.index')->with('success', 'Skema berhasil ditambahkan.');
     }
 
@@ -70,6 +73,9 @@ class SchemeController extends Controller
 
         $scheme->update($data);
 
+        // Clear cached asesors because they eager-load schemes
+        \Illuminate\Support\Facades\Cache::forget('active_asesors_with_schemes');
+
         return redirect()->route('admin.schemes.index')->with('success', 'Skema berhasil diperbarui.');
     }
 
@@ -79,6 +85,10 @@ class SchemeController extends Controller
             \Illuminate\Support\Facades\Storage::disk('public')->delete($scheme->document_path);
         }
         $scheme->delete();
+
+        // Clear cached asesors because they eager-load schemes
+        \Illuminate\Support\Facades\Cache::forget('active_asesors_with_schemes');
+
         return redirect()->route('admin.schemes.index')->with('success', 'Skema berhasil dihapus.');
     }
 }
