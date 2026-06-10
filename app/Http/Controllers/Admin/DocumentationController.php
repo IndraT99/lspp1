@@ -13,7 +13,9 @@ class DocumentationController extends Controller
      */
     public function index()
     {
-        $documentations = Documentation::latest()->get();
+        // ⚡ Bolt Optimization: Use chunked pagination instead of `->get()`
+        // to prevent O(N) memory scaling and reduce peak RAM usage on large tables.
+        $documentations = Documentation::latest()->paginate(10);
         return view('admin.documentations.index', compact('documentations'));
     }
 
