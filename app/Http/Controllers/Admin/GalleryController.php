@@ -13,7 +13,9 @@ class GalleryController extends Controller
      */
     public function index()
     {
-        $galleries = Gallery::latest()->get();
+        // ⚡ Bolt Optimization: Use chunked pagination instead of `->get()`
+        // to prevent O(N) memory scaling and reduce peak RAM usage on large tables.
+        $galleries = Gallery::latest()->paginate(10);
         return view('admin.galleries.index', compact('galleries'));
     }
 
