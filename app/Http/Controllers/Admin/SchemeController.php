@@ -39,6 +39,7 @@ class SchemeController extends Controller
 
         Scheme::create($data);
 
+        \Illuminate\Support\Facades\Cache::forget('public_asesors');
         return redirect()->route('admin.schemes.index')->with('success', 'Skema berhasil ditambahkan.');
     }
 
@@ -70,6 +71,7 @@ class SchemeController extends Controller
 
         $scheme->update($data);
 
+        \Illuminate\Support\Facades\Cache::forget('public_asesors');
         return redirect()->route('admin.schemes.index')->with('success', 'Skema berhasil diperbarui.');
     }
 
@@ -79,6 +81,7 @@ class SchemeController extends Controller
             \Illuminate\Support\Facades\Storage::disk('public')->delete($scheme->document_path);
         }
         $scheme->delete();
+        \Illuminate\Support\Facades\Cache::forget('public_asesors');
         return redirect()->route('admin.schemes.index')->with('success', 'Skema berhasil dihapus.');
     }
 }

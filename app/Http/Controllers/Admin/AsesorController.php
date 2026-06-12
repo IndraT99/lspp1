@@ -31,6 +31,7 @@ class AsesorController extends Controller
 
         Asesor::create($request->all());
 
+        \Illuminate\Support\Facades\Cache::forget('public_asesors');
         return redirect()->route('admin.asesors.index')->with('success', 'Asesor berhasil ditambahkan.');
     }
 
@@ -50,12 +51,14 @@ class AsesorController extends Controller
 
         $asesor->update($request->all());
 
+        \Illuminate\Support\Facades\Cache::forget('public_asesors');
         return redirect()->route('admin.asesors.index')->with('success', 'Asesor berhasil diperbarui.');
     }
 
     public function destroy(Asesor $asesor)
     {
         $asesor->delete();
+        \Illuminate\Support\Facades\Cache::forget('public_asesors');
         return redirect()->route('admin.asesors.index')->with('success', 'Asesor berhasil dihapus.');
     }
 }
