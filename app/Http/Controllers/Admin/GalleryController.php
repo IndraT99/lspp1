@@ -48,6 +48,8 @@ class GalleryController extends Controller
             'is_active' => $request->has('is_active'),
         ]);
 
+        \Illuminate\Support\Facades\Cache::forget('home_galleries');
+
         return redirect()->route('admin.galleries.index')->with('success', 'Foto berhasil ditambahkan.');
     }
 
@@ -97,6 +99,8 @@ class GalleryController extends Controller
 
         $gallery->update($data);
 
+        \Illuminate\Support\Facades\Cache::forget('home_galleries');
+
         return redirect()->route('admin.galleries.index')->with('success', 'Foto berhasil diperbarui.');
     }
 
@@ -109,6 +113,8 @@ class GalleryController extends Controller
             \Illuminate\Support\Facades\Storage::disk('public')->delete($gallery->image_path);
         }
         $gallery->delete();
+
+        \Illuminate\Support\Facades\Cache::forget('home_galleries');
 
         return redirect()->route('admin.galleries.index')->with('success', 'Foto berhasil dihapus.');
     }
