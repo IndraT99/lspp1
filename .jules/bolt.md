@@ -1,0 +1,3 @@
+## 2025-02-18 - Caching nested relational models
+**Learning:** When implementing caching for a model that eagerly loads a relationship (e.g. Asesor `with('scheme')`), the cache invalidation must be applied not only when the primary model (Asesor) is modified, but also when the related model (Scheme) is modified. If we only invalidate the cache when an Asesor is updated, changing a Scheme's name will result in stale data persisting on the Asesor index page because the entire JSON payload, including the nested scheme, is cached forever.
+**Action:** Always map out all eagerly loaded relationships for a cached query and explicitly add `Cache::forget` statements to the administrative controllers of those related models to prevent stale nested data.
