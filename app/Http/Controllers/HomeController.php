@@ -8,8 +8,15 @@ class HomeController extends Controller
 {
     public function index()
     {
-        $schemes = Scheme::where('is_active', true)->take(6)->get();
-        $galleries = \App\Models\Gallery::where('is_active', true)->latest('event_date')->take(6)->get();
+        // ⚡ Bolt: Cache expensive database queries for the homepage
+        // Expected impact: Eliminates 2 database queries per homepage load, reducing TTFB
+        $schemes = \Illuminate\Support\Facades\Cache::remember('home_schemes', 3600, function () {
+            return Scheme::where('is_active', true)->take(6)->get();
+        });
+
+        $galleries = \Illuminate\Support\Facades\Cache::remember('home_galleries', 3600, function () {
+            return \App\Models\Gallery::where('is_active', true)->latest('event_date')->take(6)->get();
+        });
 
         return view('home', compact('schemes', 'galleries'));
     }
