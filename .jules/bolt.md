@@ -1,0 +1,3 @@
+## 2024-06-23 - Eager-Loaded Model Cache Invalidation
+**Learning:** When caching a collection of models that include eager-loaded relationships (like `Asesor` with `scheme`), invalidating the cache only when the primary model (`Asesor`) changes is insufficient. If the related model (`Scheme`) changes, the cached data will contain stale nested data, leading to a silent UI inconsistency.
+**Action:** Always map out all eagerly loaded relationships before caching, and ensure cache invalidation hooks (`Cache::forget`) are added to the administrative controllers of BOTH the primary model and all related models.
