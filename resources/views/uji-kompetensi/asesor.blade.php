@@ -47,5 +47,8 @@
                 </div>
             @endforelse
         </div>
+        <div>
+            {{ $asesors->links() }}
+        </div>
     </div>
 @endsection
