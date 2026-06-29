@@ -1,0 +1,3 @@
+## 2025-02-12 - Caching Nested Model Eager Loads
+**Learning:** When implementing cache invalidation via Eloquent model events (`saved`/`deleted`) for responses that contain eager-loaded relationships (like `Asesor::with('scheme')`), you MUST invalidate the cache on both the primary model AND the related model's lifecycle events. Otherwise, updates to the parent relationship (e.g., updating a `Scheme` name) will leave stale data in the primary model's cached output.
+**Action:** Always map the data dependencies of a cached payload. If a cached payload eager-loads a relationship, add the `Cache::forget` invalidation hook to all related models involved in the query.
