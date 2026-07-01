@@ -20,4 +20,18 @@ class Scheme extends Model
     protected $casts = [
         'is_active' => 'boolean',
     ];
+
+    protected static function booted()
+    {
+        // ⚡ Bolt Optimization: Cache Invalidation
+        // Clears the active asesors cache when a related Scheme is updated/deleted
+        // Prevents stale data in the eager-loaded relationship
+        static::saved(function ($scheme) {
+            \Illuminate\Support\Facades\Cache::forget('asesors_active_with_schemes');
+        });
+
+        static::deleted(function ($scheme) {
+            \Illuminate\Support\Facades\Cache::forget('asesors_active_with_schemes');
+        });
+    }
 }
