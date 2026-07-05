@@ -15,4 +15,15 @@ class TempatUji extends Model
         'capacity',
         'is_active',
     ];
+
+    protected static function booted()
+    {
+        static::saved(function ($tempatUji) {
+            \Illuminate\Support\Facades\Cache::forget('active_tempat_ujis');
+        });
+
+        static::deleted(function ($tempatUji) {
+            \Illuminate\Support\Facades\Cache::forget('active_tempat_ujis');
+        });
+    }
 }

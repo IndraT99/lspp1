@@ -1,0 +1,3 @@
+## 2024-06-25 - Laravel Eloquent Caching Strategies
+**Learning:** For frequently accessed data that changes rarely (like active Schemes or Galleries on the homepage), Laravel Eloquent queries hit the database on every page load. While `->get()` retrieves the data efficiently, caching the query result significantly reduces database load and speeds up the response time.
+**Action:** Implement Laravel's `Cache::remember` for queries in `HomeController` and other public-facing controllers where data is read-heavy. Always ensure to add proper cache invalidation logic using Eloquent model events (e.g., `saved`, `deleted`) to keep the cache fresh.

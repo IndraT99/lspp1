@@ -3,13 +3,16 @@
 namespace App\Http\Controllers;
 
 use App\Models\Scheme;
-use Illuminate\Http\Request;
 
 class RegistrationController extends Controller
 {
     public function index()
     {
-        $schemes = Scheme::where('is_active', true)->get();
+        // Performance optimization: Cache frequent public-facing queries to reduce database load.
+        $schemes = \Illuminate\Support\Facades\Cache::rememberForever('active_schemes', function () {
+            return Scheme::where('is_active', true)->get();
+        });
+
         return view('registrasi.index', compact('schemes'));
     }
 }
