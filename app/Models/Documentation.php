@@ -16,4 +16,15 @@ class Documentation extends Model
     protected $casts = [
         'is_active' => 'boolean',
     ];
+
+    protected static function booted()
+    {
+        static::saved(function ($documentation) {
+            \Illuminate\Support\Facades\Cache::forget('active_documentations');
+        });
+
+        static::deleted(function ($documentation) {
+            \Illuminate\Support\Facades\Cache::forget('active_documentations');
+        });
+    }
 }
