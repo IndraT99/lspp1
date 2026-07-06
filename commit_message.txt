@@ -1,0 +1,13 @@
+⚡ Bolt: Cache home page database queries
+
+💡 What:
+Cached the frequently accessed queries on the home page using `Cache::rememberForever` and invalidated them correctly on model events.
+
+🎯 Why:
+The `HomeController@index` triggered two database queries on every load for `schemes` and `galleries`, which are static but frequently accessed. Caching these reduces repeated DB overhead.
+
+📊 Impact:
+Eliminates repeated DB queries on the home page, reducing rendering time and load.
+
+🔬 Measurement:
+Observed DB query frequency and verified tests pass smoothly without breaking anything.
