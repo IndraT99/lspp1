@@ -20,4 +20,20 @@ class Scheme extends Model
     protected $casts = [
         'is_active' => 'boolean',
     ];
+
+    /**
+     * The "booted" method of the model.
+     *
+     * @return void
+     */
+    protected static function booted()
+    {
+        static::saved(function ($scheme) {
+            \Illuminate\Support\Facades\Cache::forget('home_schemes');
+        });
+
+        static::deleted(function ($scheme) {
+            \Illuminate\Support\Facades\Cache::forget('home_schemes');
+        });
+    }
 }
