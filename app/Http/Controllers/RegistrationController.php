@@ -9,7 +9,10 @@ class RegistrationController extends Controller
 {
     public function index()
     {
-        $schemes = Scheme::where('is_active', true)->get();
+        // Optimization: Cache active schemes to reduce DB load.
+        $schemes = \Illuminate\Support\Facades\Cache::rememberForever('active_schemes', function () {
+            return Scheme::where('is_active', true)->get();
+        });
         return view('registrasi.index', compact('schemes'));
     }
 }

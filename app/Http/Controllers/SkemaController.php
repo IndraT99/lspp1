@@ -8,7 +8,10 @@ class SkemaController extends Controller
 {
     public function index()
     {
-        $schemes = \App\Models\Scheme::where('is_active', true)->get();
+        // Optimization: Cache active schemes to reduce DB load for frequently accessed public pages.
+        $schemes = \Illuminate\Support\Facades\Cache::rememberForever('active_schemes', function () {
+            return \App\Models\Scheme::where('is_active', true)->get();
+        });
         return view('uji-kompetensi.skema', compact('schemes'));
     }
 }

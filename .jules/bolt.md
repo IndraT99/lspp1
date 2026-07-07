@@ -1,0 +1,3 @@
+## 2024-07-07 - Caching Eloquent Models with Relationships
+**Learning:** When implementing global caching for Eloquent models that eager load relationships (e.g., `Asesor::with('scheme')`), it's crucial that cache invalidation (`Cache::forget`) is triggered not only by the primary model's `booted` events, but also by the related model's `booted` events. Otherwise, updates to the related model (e.g., modifying a Scheme's name) will result in stale nested data within the primary model's cache.
+**Action:** Always map out all nested relationships in a cached query and implement `booted` cache invalidation hooks on every model in that dependency chain.
