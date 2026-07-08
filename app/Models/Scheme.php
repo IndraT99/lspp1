@@ -20,4 +20,15 @@ class Scheme extends Model
     protected $casts = [
         'is_active' => 'boolean',
     ];
+
+    protected static function booted()
+    {
+        static::saved(function ($scheme) {
+            \Illuminate\Support\Facades\Cache::forget('asesors_active_with_scheme');
+        });
+
+        static::deleted(function ($scheme) {
+            \Illuminate\Support\Facades\Cache::forget('asesors_active_with_scheme');
+        });
+    }
 }
