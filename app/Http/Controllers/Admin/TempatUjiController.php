@@ -11,6 +11,7 @@ class TempatUjiController extends Controller
     public function index()
     {
         $tempatUjis = TempatUji::paginate(10);
+
         return view('admin.tempat-uji.index', compact('tempatUjis'));
     }
 
@@ -53,6 +54,7 @@ class TempatUjiController extends Controller
     public function destroy(TempatUji $tempatUji)
     {
         $tempatUji->delete();
+
         return redirect()->route('admin.tempat-uji.index')->with('success', 'Tempat Uji berhasil dihapus.');
     }
 }
