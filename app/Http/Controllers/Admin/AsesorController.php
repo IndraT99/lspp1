@@ -17,7 +17,7 @@ class AsesorController extends Controller
 
     public function create()
     {
-        $schemes = Scheme::where('is_active', true)->get();
+        $schemes = Scheme::getActiveSchemes();
         return view('admin.asesors.create', compact('schemes'));
     }
 
@@ -36,7 +36,7 @@ class AsesorController extends Controller
 
     public function edit(Asesor $asesor)
     {
-        $schemes = Scheme::where('is_active', true)->get();
+        $schemes = Scheme::getActiveSchemes();
         return view('admin.asesors.edit', compact('asesor', 'schemes'));
     }
 
