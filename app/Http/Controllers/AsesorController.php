@@ -8,7 +8,7 @@ class AsesorController extends Controller
 {
     public function index()
     {
-        $asesors = \App\Models\Asesor::where('is_active', true)->with('scheme')->get();
+        $asesors = \App\Models\Asesor::getActiveAsesors();
         return view('uji-kompetensi.asesor', compact('asesors'));
     }
 }
