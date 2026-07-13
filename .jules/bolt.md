@@ -1,0 +1,3 @@
+## 2024-05-24 - Efficient DB Query Caching
+**Learning:** Laravel's Model `booted` method provides a centralized and elegant way to manage cache invalidation on `saved` and `deleted` events. This ensures that any creation, update, or deletion globally clears the related cache keys without littering controllers with cache invalidation logic.
+**Action:** When implementing caching for frequently accessed data (like public index pages), pair `Cache::rememberForever` with automated invalidation hooks directly on the corresponding Eloquent models. Use the fully qualified class name `\Illuminate\Support\Facades\Cache` for robustness in models or controllers without needing separate use statements.
