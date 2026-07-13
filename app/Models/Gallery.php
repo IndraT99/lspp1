@@ -18,4 +18,15 @@ class Gallery extends Model
         'event_date' => 'date',
         'is_active' => 'boolean',
     ];
+
+    protected static function booted()
+    {
+        static::saved(function ($gallery) {
+            \Illuminate\Support\Facades\Cache::forget('home_galleries');
+        });
+
+        static::deleted(function ($gallery) {
+            \Illuminate\Support\Facades\Cache::forget('home_galleries');
+        });
+    }
 }
