@@ -14,6 +14,7 @@ class GalleryController extends Controller
     public function index()
     {
         $galleries = Gallery::latest()->get();
+
         return view('admin.galleries.index', compact('galleries'));
     }
 
