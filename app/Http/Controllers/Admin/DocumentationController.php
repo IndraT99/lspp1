@@ -14,6 +14,7 @@ class DocumentationController extends Controller
     public function index()
     {
         $documentations = Documentation::latest()->get();
+
         return view('admin.documentations.index', compact('documentations'));
     }
 
