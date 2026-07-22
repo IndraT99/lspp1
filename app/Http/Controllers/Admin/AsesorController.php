@@ -12,12 +12,14 @@ class AsesorController extends Controller
     public function index()
     {
         $asesors = Asesor::with('scheme')->paginate(10);
+
         return view('admin.asesors.index', compact('asesors'));
     }
 
     public function create()
     {
         $schemes = Scheme::where('is_active', true)->get();
+
         return view('admin.asesors.create', compact('schemes'));
     }
 
@@ -37,6 +39,7 @@ class AsesorController extends Controller
     public function edit(Asesor $asesor)
     {
         $schemes = Scheme::where('is_active', true)->get();
+
         return view('admin.asesors.edit', compact('asesor', 'schemes'));
     }
 
@@ -44,7 +47,7 @@ class AsesorController extends Controller
     {
         $request->validate([
             'name' => 'required',
-            'reg_number' => 'required|unique:asesors,reg_number,' . $asesor->id,
+            'reg_number' => 'required|unique:asesors,reg_number,'.$asesor->id,
             'scheme_id' => 'nullable|exists:schemes,id',
         ]);
 
@@ -56,6 +59,7 @@ class AsesorController extends Controller
     public function destroy(Asesor $asesor)
     {
         $asesor->delete();
+
         return redirect()->route('admin.asesors.index')->with('success', 'Asesor berhasil dihapus.');
     }
 }
