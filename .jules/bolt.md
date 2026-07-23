@@ -1,0 +1,3 @@
+## 2024-07-23 - Caching Eager-Loaded Relationships
+**Learning:** When implementing caching for a primary model that eager-loads a relationship (e.g., `Asesor::with('scheme')`), cache invalidation hooks (`saved` and `deleted` model events) must be applied to BOTH the primary model and the related model. If only the primary model is hooked, updates to the related model's data will result in stale nested data being served from the cache.
+**Action:** Always map the dependency graph of eager-loaded relations in cached queries and apply `Cache::forget` hooks to all models involved in the cached result set.
