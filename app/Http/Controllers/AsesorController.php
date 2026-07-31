@@ -8,7 +8,11 @@ class AsesorController extends Controller
 {
     public function index()
     {
-        $asesors = \App\Models\Asesor::where('is_active', true)->with('scheme')->get();
+        // ⚡ BOLT: Caching the list of active assessors with their schemes.
+        // Impact: Eliminates N+1 queries and repetitive database access on the assessor index page.
+        $asesors = \Illuminate\Support\Facades\Cache::rememberForever('active_asesors', function () {
+            return \App\Models\Asesor::where('is_active', true)->with('scheme')->get();
+        });
         return view('uji-kompetensi.asesor', compact('asesors'));
     }
 }
