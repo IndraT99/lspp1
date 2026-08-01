@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Http\Controllers;
 
 use App\Models\Assessment;
@@ -26,7 +27,7 @@ class CertificateController extends Controller
         return view('certificate.check', [
             'result' => $assessment,
             'search_performed' => true,
-            'search_query' => $request->certificate_number
+            'search_query' => $request->certificate_number,
         ]);
     }
 }
