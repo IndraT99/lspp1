@@ -11,6 +11,7 @@ class SchemeController extends Controller
     public function index()
     {
         $schemes = Scheme::paginate(10);
+
         return view('admin.schemes.index', compact('schemes'));
     }
 
@@ -50,7 +51,7 @@ class SchemeController extends Controller
     public function update(Request $request, Scheme $scheme)
     {
         $request->validate([
-            'code' => 'required|unique:schemes,code,' . $scheme->id,
+            'code' => 'required|unique:schemes,code,'.$scheme->id,
             'name' => 'required',
             'description' => 'required',
             'unit_count' => 'nullable|integer',
@@ -79,6 +80,7 @@ class SchemeController extends Controller
             \Illuminate\Support\Facades\Storage::disk('public')->delete($scheme->document_path);
         }
         $scheme->delete();
+
         return redirect()->route('admin.schemes.index')->with('success', 'Skema berhasil dihapus.');
     }
 }
