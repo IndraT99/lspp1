@@ -1,0 +1,3 @@
+## 2024-10-31 - Caching Eager-Loaded Relationships
+**Learning:** When implementing caching for a model that includes eager-loaded relationships (like Asesor with its Scheme), you must ensure that cache invalidation (forgetting the cache key) is applied to both the primary model and the related model. If you only clear the cache when the primary model updates, modifications to the related model will lead to stale nested data in the cache.
+**Action:** Always add cache invalidation hooks (like `saved` and `deleted` model events) to both the primary and related models when caching queries with eager loading.
