@@ -1,0 +1,3 @@
+## 2023-10-27 - Caching Eager Loaded Relationships
+**Learning:** When implementing caching for a model that includes eager-loaded relationships (like `Asesor::with('scheme')`), it's crucial to implement cache invalidation (e.g., `Cache::forget`) not only on the primary model (`Asesor`) but also on the related model (`Scheme`). If you only invalidate when the primary model changes, updates to the related model's data will not be reflected in the cached output, leading to stale nested data.
+**Action:** Always map out all models involved in a cached query and ensure `saved` and `deleted` model events are hooked up for all of them to invalidate the shared cache key.
