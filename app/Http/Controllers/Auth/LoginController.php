@@ -48,6 +48,7 @@ class LoginController extends Controller
         Auth::logout();
         $request->session()->invalidate();
         $request->session()->regenerateToken();
+
         return redirect('/');
     }
 
@@ -58,7 +59,7 @@ class LoginController extends Controller
      */
     protected function ensureIsNotRateLimited(Request $request): void
     {
-        if (!RateLimiter::tooManyAttempts($this->throttleKey($request), 5)) {
+        if (! RateLimiter::tooManyAttempts($this->throttleKey($request), 5)) {
             return;
         }
 
@@ -77,6 +78,6 @@ class LoginController extends Controller
      */
     protected function throttleKey(Request $request): string
     {
-        return Str::transliterate(Str::lower($request->input('email')) . '|' . $request->ip());
+        return Str::transliterate(Str::lower($request->input('email')).'|'.$request->ip());
     }
 }
