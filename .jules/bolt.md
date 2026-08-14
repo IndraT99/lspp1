@@ -1,0 +1,3 @@
+## 2024-08-14 - Caching Models with Eager-Loaded Relationships
+**Learning:** When implementing caching for a model that eagerly loads a relationship (like `Asesor` with `scheme`), cache invalidation using model events (`saved` and `deleted`) must be applied to both the primary model (`Asesor`) AND the related model (`Scheme`). If only the primary model invalidates the cache, updates to the related model's data will not be reflected, leading to stale nested data in the UI.
+**Action:** Always check the `with()` clauses when caching Eloquent queries. Apply `Cache::forget` hooks to all models involved in the eager loading chain to ensure global cache consistency.
