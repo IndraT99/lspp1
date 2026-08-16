@@ -16,6 +16,17 @@ class Asesor extends Model
         'is_active',
     ];
 
+    protected static function booted()
+    {
+        static::saved(function ($model) {
+            \Illuminate\Support\Facades\Cache::forget('active_asesors_with_scheme');
+        });
+
+        static::deleted(function ($model) {
+            \Illuminate\Support\Facades\Cache::forget('active_asesors_with_scheme');
+        });
+    }
+
     public function scheme()
     {
         return $this->belongsTo(Scheme::class);
