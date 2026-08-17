@@ -20,4 +20,16 @@ class Scheme extends Model
     protected $casts = [
         'is_active' => 'boolean',
     ];
+
+    protected static function booted()
+    {
+        static::saved(function ($model) {
+            \Illuminate\Support\Facades\Cache::forget('asesors_active');
+            // Note: we might want to also invalidate other caches here in the future
+        });
+
+        static::deleted(function ($model) {
+            \Illuminate\Support\Facades\Cache::forget('asesors_active');
+        });
+    }
 }
