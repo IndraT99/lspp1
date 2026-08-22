@@ -17,6 +17,17 @@ class Scheme extends Model
         'registration_link',
     ];
 
+    protected static function booted()
+    {
+        static::saved(function ($model) {
+            \Illuminate\Support\Facades\Cache::forget('active_asesors');
+        });
+
+        static::deleted(function ($model) {
+            \Illuminate\Support\Facades\Cache::forget('active_asesors');
+        });
+    }
+
     protected $casts = [
         'is_active' => 'boolean',
     ];
