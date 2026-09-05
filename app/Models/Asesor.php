@@ -20,4 +20,17 @@ class Asesor extends Model
     {
         return $this->belongsTo(Scheme::class);
     }
+
+    protected static function booted()
+    {
+        parent::booted();
+
+        static::saved(function ($model) {
+            \Illuminate\Support\Facades\Cache::forget('asesors_public_list');
+        });
+
+        static::deleted(function ($model) {
+            \Illuminate\Support\Facades\Cache::forget('asesors_public_list');
+        });
+    }
 }
