@@ -1,0 +1,3 @@
+## 2024-05-14 - Global Cache Invalidation for Eager-Loaded Relationships
+**Learning:** When caching models with eager-loaded relationships (like `Asesor` with `scheme`), invalidating the cache only on the primary model is insufficient. If a related model (e.g., `Scheme`) is updated, the cached primary models will contain stale nested data until the cache expires or the primary model is updated.
+**Action:** Always implement cache invalidation model events (`saved` and `deleted` using `Cache::forget()`) on both the primary model and the related model when caching queries that involve relationships. Using the model's `booted` method ensures this logic is centralized and consistent across all administrative actions.
