@@ -1,0 +1,3 @@
+## 2026-09-22 - Global Cache Consistency for Eager-Loaded Relationships
+**Learning:** When implementing caching for Eloquent models with eager-loaded relationships (e.g., Asesor with scheme), relying solely on cache invalidation in the primary model's CRUD controllers is brittle.
+**Action:** Always use Eloquent Model Events (`saved` and `deleted` in the `booted` method) on BOTH the primary model and the related model to invalidate the cache globally (`Cache::forget`). This prevents stale nested data across the entire application without needing to inject invalidation logic into multiple controllers.
