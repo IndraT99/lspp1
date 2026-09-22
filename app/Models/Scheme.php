@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Cache;
 
 class Scheme extends Model
 {
@@ -20,4 +21,16 @@ class Scheme extends Model
     protected $casts = [
         'is_active' => 'boolean',
     ];
+
+    // ⚡ Bolt: Cache invalidation to prevent stale nested data
+    protected static function booted()
+    {
+        static::saved(function ($model) {
+            Cache::forget('active_asesors_with_schemes');
+        });
+
+        static::deleted(function ($model) {
+            Cache::forget('active_asesors_with_schemes');
+        });
+    }
 }

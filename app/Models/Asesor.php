@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Cache;
 
 class Asesor extends Model
 {
@@ -19,5 +20,17 @@ class Asesor extends Model
     public function scheme()
     {
         return $this->belongsTo(Scheme::class);
+    }
+
+    // ⚡ Bolt: Cache invalidation to prevent stale data
+    protected static function booted()
+    {
+        static::saved(function ($model) {
+            Cache::forget('active_asesors_with_schemes');
+        });
+
+        static::deleted(function ($model) {
+            Cache::forget('active_asesors_with_schemes');
+        });
     }
 }
