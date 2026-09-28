@@ -1,0 +1,3 @@
+## 2025-02-12 - Model Event Caching for Eager-Loaded Relations
+**Learning:** When applying query caching to models with eager-loaded relations (like `Asesor::with('scheme')->get()`), cache invalidation (`Cache::forget`) must be applied in the `booted` events (`saved` and `deleted`) of *both* the primary model (`Asesor`) and the related model (`Scheme`). Forgetting it only on the primary model leads to stale related data when the related model is updated. Using Model Events over controller-level caching ensures global consistency across all CRUD operations.
+**Action:** Always map the full relationship tree involved in a cached query and implement invalidation hooks on all dependent models using Eloquent `booted` methods to prevent stale nested data.
