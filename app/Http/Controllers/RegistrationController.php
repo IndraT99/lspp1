@@ -3,13 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Models\Scheme;
-use Illuminate\Http\Request;
 
 class RegistrationController extends Controller
 {
     public function index()
     {
-        $schemes = Scheme::where('is_active', true)->get();
+        $schemes = Scheme::getActiveSchemes();
+
         return view('registrasi.index', compact('schemes'));
     }
 }
