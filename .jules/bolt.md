@@ -1,0 +1,3 @@
+## 2025-02-12 - Caching nested eager-loaded data consistency
+**Learning:** When caching Eloquent collections that include eager-loaded relationships (like `Asesor` with `scheme`), cache invalidation model events (`saved` and `deleted`) must be attached not just to the primary model, but also to the related model. Otherwise, updating the related model will result in stale nested data within the cached primary collection.
+**Action:** Always map out all related entities in a cached query and apply global cache invalidation (`Cache::forget`) in the `booted` methods of all involved Eloquent models.
