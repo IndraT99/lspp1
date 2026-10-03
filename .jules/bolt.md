@@ -1,0 +1,3 @@
+## 2025-02-12 - Dual-Model Cache Invalidation
+**Learning:** When implementing caching for a model that eager loads its relations (e.g., `Asesor::with('scheme')`), adding cache invalidation (`Cache::forget`) only to the primary model's (`Asesor`) `booted` events is insufficient. If a related `Scheme` model is updated directly, the cached data for `Asesor` will remain stale since the relationship properties have changed without triggering an `Asesor` update.
+**Action:** Always verify if cached queries include eager-loaded nested relationships. If they do, implement the identical `Cache::forget` model events on all related models involved in the cached query to ensure global cache consistency across administrative CRUD actions.
