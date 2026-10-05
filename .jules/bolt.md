@@ -1,0 +1,3 @@
+## 2024-05-30 - Caching Eager-Loaded Relationships in Laravel
+**Learning:** When implementing model-level cache invalidation for frequently accessed data that eager-loads relationships (like Asesor loading Scheme), the cache must be invalidated not only when the primary model (Asesor) is modified, but also when the related model (Scheme) is modified. Otherwise, the cached data will contain stale related models.
+**Action:** Always check the `with()` clauses when caching Eloquent queries. If relationships are eager-loaded, attach `saved` and `deleted` cache invalidation events to all related models involved in the query, not just the primary model.
