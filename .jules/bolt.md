@@ -1,0 +1,6 @@
+## 2024-10-07 - [Controller N+1 and Cache Optimization]
+**Learning:** Found N+1 queries when loading `asesors` (if they have `scheme` relationship but not eager loaded). However, `AsesorController` already uses `with('scheme')`. The main optimization point here is to add caching for frequently accessed data like `schemes`, `galleries`, `asesors`, and `tempat-ujis` since these are likely read-heavy (displayed on the landing page and public lists) and rarely changed.
+**Action:** Implement Laravel's model observer or simple `Cache::remember` in the controllers for `schemes` and `galleries` on the homepage, and other public lists. Given the 50 line limit, adding `Cache::remember` to `HomeController@index` is a quick, high-impact win for the landing page.
+## 2024-10-07 - [Cache Invalidation for Eager-Loaded Relationships]
+**Learning:** When implementing caching for Eloquent models with eager-loaded relationships (e.g., Asesor with Scheme), adding cache invalidation only to the primary model is insufficient. If the related model (Scheme) updates, the cached data becomes stale.
+**Action:** Always ensure cache invalidation events (saved, deleted) are applied to both the primary model and any related models included in the cached query.
