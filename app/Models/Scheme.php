@@ -20,4 +20,16 @@ class Scheme extends Model
     protected $casts = [
         'is_active' => 'boolean',
     ];
+
+    // ⚡ Bolt: Invalidate cache when a Scheme is saved or deleted since Asesor eager loads Scheme
+    protected static function booted()
+    {
+        static::saved(function () {
+            \Illuminate\Support\Facades\Cache::forget('active_asesors_with_schemes');
+        });
+
+        static::deleted(function () {
+            \Illuminate\Support\Facades\Cache::forget('active_asesors_with_schemes');
+        });
+    }
 }
