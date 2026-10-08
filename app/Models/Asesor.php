@@ -20,4 +20,16 @@ class Asesor extends Model
     {
         return $this->belongsTo(Scheme::class);
     }
+
+    // ⚡ Bolt: Invalidate cache when an Asesor is saved or deleted
+    protected static function booted()
+    {
+        static::saved(function () {
+            \Illuminate\Support\Facades\Cache::forget('active_asesors_with_schemes');
+        });
+
+        static::deleted(function () {
+            \Illuminate\Support\Facades\Cache::forget('active_asesors_with_schemes');
+        });
+    }
 }
