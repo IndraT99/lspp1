@@ -20,4 +20,17 @@ class Asesor extends Model
     {
         return $this->belongsTo(Scheme::class);
     }
+
+    protected static function booted()
+    {
+        // ⚡ Bolt Performance Optimization:
+        // Clear the cache when an asesor is modified to ensure data consistency
+        static::saved(function ($model) {
+            \Illuminate\Support\Facades\Cache::forget('active_asesors');
+        });
+
+        static::deleted(function ($model) {
+            \Illuminate\Support\Facades\Cache::forget('active_asesors');
+        });
+    }
 }
