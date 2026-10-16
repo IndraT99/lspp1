@@ -3,9 +3,22 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Cache;
 
 class Scheme extends Model
 {
+    protected static function booted()
+    {
+        // ⚡ Invalidate active asesors cache because asesors eager-load their schemes
+        static::saved(function () {
+            Cache::forget('active_asesors');
+        });
+
+        static::deleted(function () {
+            Cache::forget('active_asesors');
+        });
+    }
+
     protected $fillable = [
         'code',
         'name',
