@@ -1,0 +1,3 @@
+## 2025-02-12 - Eloquent Cache Invalidation Pattern
+**Learning:** When implementing caching for models with eager-loaded relationships (e.g., `Asesor` with `scheme`), we must use Eloquent Model Events (`saved` and `deleted`) in the `booted` method for cache invalidation instead of doing it in controllers, ensuring global cache consistency. Crucially, the invalidation must happen on both the primary model and the related model to prevent stale nested data.
+**Action:** Always implement cache invalidation at the model level via `booted` events, and mirror the invalidation on related models if their data is eagerly loaded in the cached query.
