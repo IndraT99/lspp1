@@ -1,0 +1,3 @@
+## 2024-10-21 - Caching Models with Eager-Loaded Relationships
+**Learning:** In this Laravel architecture, caching a model that includes eager-loaded relationships (like `Asesor` with `scheme`) creates a cache invalidation trap. If you only invalidate the cache on the primary model's (`Asesor`) events, updates to the related model (`Scheme`) will result in stale nested data being served from the cache.
+**Action:** When implementing caching for collections with eager-loaded relationships, always add cache invalidation (`Cache::forget`) to the `saved` and `deleted` events of *both* the primary model and all related models included in the cache payload.

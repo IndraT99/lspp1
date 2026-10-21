@@ -20,4 +20,16 @@ class Asesor extends Model
     {
         return $this->belongsTo(Scheme::class);
     }
+
+    protected static function booted()
+    {
+        // ⚡ Invalidate the asesors cache when an Asesor is created, updated, or deleted
+        static::saved(function ($model) {
+            \Illuminate\Support\Facades\Cache::forget('asesors.active');
+        });
+
+        static::deleted(function ($model) {
+            \Illuminate\Support\Facades\Cache::forget('asesors.active');
+        });
+    }
 }
