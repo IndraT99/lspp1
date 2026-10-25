@@ -20,4 +20,15 @@ class Scheme extends Model
     protected $casts = [
         'is_active' => 'boolean',
     ];
+
+    protected static function booted()
+    {
+        // ⚡ Bolt: Invalidate asesors cache when a scheme is updated to prevent stale nested data
+        $clearCache = function () {
+            \Illuminate\Support\Facades\Cache::forget('asesors.active');
+        };
+
+        static::saved($clearCache);
+        static::deleted($clearCache);
+    }
 }
