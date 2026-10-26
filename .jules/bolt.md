@@ -1,0 +1,3 @@
+## 2024-03-24 - Model Event Caching for Eager Relationships
+**Learning:** The codebase queries master data like Assessors and their eager-loaded relationships directly in controllers without caching, leading to potentially slow page loads as data grows. Cache invalidation is best managed globally via Eloquent Model Events (`booted`) on both primary and related models rather than scattering `Cache::forget` calls across Admin CRUD controllers.
+**Action:** Use Eloquent Model Events for cache invalidation on primary and eager-loaded relationship models when applying caching to master data to guarantee consistency.
