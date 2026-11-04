@@ -1,0 +1,3 @@
+## 2026-11-04 - Cache Invalidation for Eager-Loaded Relations
+**Learning:** When caching a query that uses eager-loaded relationships (like `Asesor::with('scheme')`), it's not enough to clear the cache only when the primary `Asesor` model is updated. If a related `Scheme` model is modified, the cached `Asesor` list will still contain stale nested `Scheme` data. Cache invalidation must be tied to both models.
+**Action:** When implementing caching on queries with eager-loaded relations, always bind cache invalidation events (`saved`, `deleted`) to all models involved in the query in their respective `booted()` methods to ensure global consistency.
