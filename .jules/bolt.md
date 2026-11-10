@@ -1,0 +1,3 @@
+## 2025-02-12 - Eloquent Global Cache Invalidation for Eager-Loaded Relations
+**Learning:** When implementing caching for models with eager-loaded relationships in Laravel (like `Asesor` with `scheme`), cache invalidation must be applied to the model events of *both* the primary model and the related model. If only the primary model is updated, the cache would contain stale nested data when the related model is changed.
+**Action:** Always verify all eager-loaded relationships when caching Eloquent collections and ensure `Cache::forget` is hooked into the `booted` events (`saved`, `deleted`) of every involved model, keeping administrative controllers clean.
