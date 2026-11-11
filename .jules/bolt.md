@@ -1,0 +1,3 @@
+## 2024-11-11 - Cache Invalidation for Eager-Loaded Relationships
+**Learning:** When implementing caching for frequently accessed models that include eager-loaded relationships (like `Asesor` with `Scheme`), cache invalidation must be applied to *both* the primary model and the related model via Eloquent Model Events (`saved` and `deleted` in `booted()`). Otherwise, updates to the related model won't invalidate the cache, leading to stale nested data on the frontend. Using model events also ensures global consistency and avoids manual injection across multiple administrative CRUD controllers.
+**Action:** Always invalidate cache for both primary and related models via the `booted()` method model events when caching eager-loaded relationship queries.
